@@ -204,10 +204,8 @@ class Gemini(BaseLlm):
             parts=[types.Part.from_text(text=llm_request.config.system_instruction)],
         )
         llm_request.live_connect_config.tools = llm_request.config.tools
-        print(f"live_config:{llm_request.live_connect_config}")
-        print(llm_request.model)
         async with self._live_api_client.aio.live.connect(
-            model="gemini-2.0-flash-live-preview-04-09",
+            model=llm_request.model,
             config=llm_request.live_connect_config,
         ) as live_session:
             yield GeminiLlmConnection(live_session)
