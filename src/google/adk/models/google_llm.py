@@ -175,7 +175,6 @@ class Gemini(BaseLlm):
   def _live_api_client(self) -> Client:
     if self._api_backend == 'vertex':
       # use default api version for vertex
-      api_version = "v1beta1"
       return Client(
           http_options=types.HttpOptions(headers=self._tracking_headers)
       )
