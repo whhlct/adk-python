@@ -177,7 +177,7 @@ class Gemini(BaseLlm):
       # use default api version for vertex
       api_version = "v1beta1"
       return Client(
-          http_options=types.HttpOptions(headers=self._tracking_headers,version=api_version)
+          http_options=types.HttpOptions(headers=self._tracking_headers)
       )
     else:
       # use v1alpha for ml_dev
