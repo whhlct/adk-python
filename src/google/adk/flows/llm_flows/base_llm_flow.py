@@ -364,7 +364,6 @@ class BaseLlmFlow(ABC):
     async for event in self._postprocess_run_processors_async(
         invocation_context, llm_response
     ):
-      print("event...1313132:", event.author)
       yield event
 
     # Skip the model response event if there is no content and no error code.
