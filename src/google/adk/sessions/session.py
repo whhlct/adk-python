@@ -61,9 +61,7 @@ class Session(BaseModel):
         "user_id": self.user_id,
         "state": self.state,
         "events": [
-            e.to_dict(
-                exclude={"content": {"parts": {"text": False, "__all__": True}}}
-            )
+            e.to_dict()
             for e in self.events
         ],  # requires Event.to_dict()
         "last_update_time": self.last_update_time,
