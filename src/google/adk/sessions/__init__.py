@@ -20,7 +20,7 @@ from .state import State
 from .vertex_ai_session_service import VertexAiSessionService
 from .redis_memory_session_service import RedisMemorySessionService
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('google_adk.' + __name__)
 
 
 __all__ = [
