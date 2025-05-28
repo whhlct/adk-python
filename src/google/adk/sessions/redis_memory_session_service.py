@@ -10,7 +10,6 @@ from ..events.event import Event
 from .base_session_service import (
     BaseSessionService,
     GetSessionConfig,
-    ListEventsResponse,
     ListSessionsResponse,
 )
 from .session import Session
@@ -147,12 +146,6 @@ class RedisMemorySessionService(BaseSessionService):
     self._save_sessions(session.app_name, session.user_id, sessions)
 
     return event
-
-  @override
-  def list_events(
-      self, *, app_name: str, user_id: str, session_id: str
-  ) -> ListEventsResponse:
-    raise NotImplementedError()
 
   def _merge_state(
       self, app_name: str, user_id: str, session: Session
