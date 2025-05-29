@@ -196,7 +196,7 @@ class Runner:
       invocation_context.agent = self._find_agent_to_run(session, root_agent)
       async for event in invocation_context.agent.run_async(invocation_context):
         if not event.partial:
-          self.session_service.append_event(session=session, event=event)
+          await self.session_service.append_event(session=session, event=event)
         yield event
 
   async def _append_new_message_to_session(
