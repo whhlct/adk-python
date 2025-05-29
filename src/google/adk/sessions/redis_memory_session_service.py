@@ -122,8 +122,8 @@ class RedisMemorySessionService(BaseSessionService):
       self._save_sessions(app_name, user_id, sessions)
 
   @override
-  def append_event(self, session: Session, event: Event) -> Event:
-    super().append_event(session=session, event=event)
+  async def append_event(self, session: Session, event: Event) -> Event:
+    await super().append_event(session=session, event=event)
     session.last_update_time = event.timestamp
 
     if event.actions and event.actions.state_delta:

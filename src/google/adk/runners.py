@@ -241,7 +241,7 @@ class Runner:
         author="user",
         content=new_message,
     )
-    self.session_service.append_event(session=session, event=event)
+    await self.session_service.append_event(session=session, event=event)
 
   async def run_live(
       self,
