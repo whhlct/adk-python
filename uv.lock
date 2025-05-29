@@ -1328,7 +1328,6 @@ dependencies = [
     { name = "pyyaml" },
     { name = "redis" },
     { name = "sqlalchemy" },
-    { name = "toolbox-core" },
     { name = "tzlocal" },
     { name = "uvicorn" },
 ]
@@ -1368,6 +1367,7 @@ extensions = [
     { name = "litellm" },
     { name = "llama-index-readers-file" },
     { name = "lxml" },
+    { name = "toolbox-core" },
 ]
 test = [
     { name = "anthropic" },
@@ -1433,7 +1433,7 @@ requires-dist = [
     { name = "sphinx-rtd-theme", marker = "extra == 'docs'" },
     { name = "sqlalchemy", specifier = ">=2.0" },
     { name = "tabulate", marker = "extra == 'eval'", specifier = ">=0.9.0" },
-    { name = "toolbox-core", specifier = ">=0.1.0" },
+    { name = "toolbox-core", marker = "extra == 'extensions'", specifier = ">=0.1.0" },
     { name = "tzlocal", specifier = ">=5.3" },
     { name = "uvicorn", specifier = ">=0.34.0" },
 ]
