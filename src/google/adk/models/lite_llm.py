@@ -296,7 +296,7 @@ def _schema_to_dict(schema: types.Schema) -> dict:
     if result_dict.get('type') == 'array':
         items_schema = getattr(schema, 'items', None)
         if isinstance(items_schema, types.Schema):
-            result_dict['items'] = _schema_to_dict(items_schema) # Рекурсия
+            result_dict['items'] = _schema_to_dict(items_schema)
         elif isinstance(items_schema, dict):
              if 'type' in items_schema and isinstance(items_schema['type'], types.Type):
                  items_schema['type'] = TYPE_LABELS.get(items_schema['type'], "null")
