@@ -38,7 +38,7 @@ from .llm_response import LlmResponse
 if TYPE_CHECKING:
   from .llm_request import LlmRequest
 
-logger = logging.getLogger('google_adk.' + __name__)
+logger = logging.getLogger("google_adk." + __name__)
 
 _NEW_LINE = '\n'
 _EXCLUDED_PART_FIELD = {'inline_data': {'data'}}
@@ -53,7 +53,7 @@ class Gemini(BaseLlm):
     model: The name of the Gemini model.
   """
 
-  model: str = 'gemini-1.5-flash'
+  model: str = "gemini-1.5-flash"
 
   @staticmethod
   @override
@@ -65,11 +65,11 @@ class Gemini(BaseLlm):
     """
 
     return [
-        r'gemini-.*',
+        r"gemini-.*",
         # fine-tuned vertex endpoint pattern
-        r'projects\/.+\/locations\/.+\/endpoints\/.+',
+        r"projects\/.+\/locations\/.+\/endpoints\/.+",
         # vertex gemini long name
-        r'projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+',
+        r"projects\/.+\/locations\/.+\/publishers\/google\/models\/gemini.+",
     ]
 
   async def generate_content_async(
@@ -87,7 +87,7 @@ class Gemini(BaseLlm):
     self._preprocess_request(llm_request)
     self._maybe_append_user_content(llm_request)
     logger.info(
-        'Sending out request, model: %s, backend: %s, stream: %s',
+        "Sending out request, model: %s, backend: %s, stream: %s",
         llm_request.model,
         self._api_backend,
         stream,
@@ -194,8 +194,8 @@ class Gemini(BaseLlm):
     language_label = 'gl-python/' + sys.version.split()[0]
     version_header_value = f'{framework_label} {language_label}'
     tracking_headers = {
-        'x-goog-api-client': version_header_value,
-        'user-agent': version_header_value,
+        "x-goog-api-client": version_header_value,
+        "user-agent": version_header_value,
     }
     return tracking_headers
 
@@ -203,7 +203,7 @@ class Gemini(BaseLlm):
   def _live_api_client(self) -> Client:
     if self._api_backend == GoogleLLMVariant.VERTEX_AI:
       # use beta version for vertex api
-      api_version = 'v1beta1'
+      api_version = "v1beta1"
       # use default api version for vertex
       return Client(
           http_options=types.HttpOptions(
@@ -231,7 +231,7 @@ class Gemini(BaseLlm):
     """
 
     llm_request.live_connect_config.system_instruction = types.Content(
-        role='system',
+        role="system",
         parts=[
             types.Part.from_text(text=llm_request.config.system_instruction)
         ],
@@ -252,7 +252,7 @@ class Gemini(BaseLlm):
 def _build_function_declaration_log(
     func_decl: types.FunctionDeclaration,
 ) -> str:
-  param_str = '{}'
+  param_str = "{}"
   if func_decl.parameters and func_decl.parameters.properties:
     param_str = str({
         k: v.model_dump(exclude_none=True)
@@ -281,7 +281,7 @@ def _build_request_log(req: LlmRequest) -> str:
       content.model_dump_json(
           exclude_none=True,
           exclude={
-              'parts': {
+              "parts": {
                   i: _EXCLUDED_PART_FIELD for i in range(len(content.parts))
               }
           },
@@ -309,7 +309,7 @@ def _build_response_log(resp: types.GenerateContentResponse) -> str:
   if function_calls := resp.function_calls:
     for func_call in function_calls:
       function_calls_text.append(
-          f'name: {func_call.name}, args: {func_call.args}'
+          f"name: {func_call.name}, args: {func_call.args}"
       )
   return f"""
 LLM Response:
